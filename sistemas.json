@@ -1,0 +1,32 @@
+{
+    "debian": {
+        "comando_install": "apt install -y ",
+        "comando_atualizar": "apt update",
+        "programas": [
+            "glade", "gimp", "pycodestyle", "git", "poppler-utils",
+            "bpython", "net-tools", "simplescreenrecorder", "papirus-icon-theme",
+            "zeal", "usb-creator-gtk", "arc-theme", "gparted",
+            "snapd", "gnome-software-plugin-snap", "transmission-gtk",
+            "bash-completion", "gnome-boxes", "python3-pip", "libreoffice",
+            "zsh", "curl", "nano", "vlc", "file-roller", "flameshot",
+            "diodon", "unrar", "curlftpfs"
+        ],
+        "pasta-bin": "/usr/bin",
+        "comando_autoremove": "apt autoremove -y"
+    },
+    "arch-linux": {
+        "comando_install": "pacman -S ",
+        "comando_atualizar": "pacman -Syy",
+        "programas": [
+            "glade", "gimp", "pycodestyle", "git", "poppler-utils",
+            "bpython", "papirus-icon-theme",
+            "zeal", "usb-creator-gtk", "arc-theme", "gparted",
+            "snapd", "gnome-software-plugin-snap", "transmission-gtk",
+            "bash-completion", "gnome-boxes", "python-pip", "libreoffice",
+            "zsh", "curl", "nano", "vlc", "file-roller", "flameshot",
+            "diodon", "unrar", "curlftpfs"
+        ],
+        "pasta-bin": "/bin",
+        "comando_autoremove": "pacman -Qtqd | sudo pacman -Rnsc -"
+    }
+}
