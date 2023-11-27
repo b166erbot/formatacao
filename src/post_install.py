@@ -18,7 +18,7 @@ def verificar_root() -> None:
             'execute este script como root:'
             ' sudo `which python3` post_install.py'
         )
-        exit()
+        exit(1)
 
 
 def post_install(argumentos):
@@ -30,7 +30,7 @@ def post_install(argumentos):
                 config = json.load(configfile)
     else:
         print(
-            'arquivo configuracoes.json não existe. por favor '
+            'arquivo sistemas.json não existe. por favor '
             'execute o pre_install para poder criar um novo'
         )
         exit()
@@ -44,6 +44,7 @@ def post_install(argumentos):
     # gnome-software, loja de programas
     # file-roller para arquivos zip modo gráfico
     # o curl é preciso baixar pois ele será executado ali em baixo
+    # removi o video-downloader pois o mesmo é instalado pelo snap.
     # remover esses comentários acima e colocar em um arquivo de texto?
     sy(
         (
@@ -51,7 +52,6 @@ def post_install(argumentos):
             + ' '.join(config[argumentos.sistema]['programas'])
         )
     )
-    sy('snap install video-downloader')
     # woeusb (pendrive bootavel para windows no linux EXCENCIAL)
     # ventoy (pendrive bootabel para qualquer coisa)
 
@@ -84,7 +84,7 @@ def post_install(argumentos):
 
     # removendo programas e dependências desnecessárias
     if argumentos.sistema == 'debian':
-        sy('apt autoremove -y vim rhythmbox')
+        sy('apt autoremove -y vim rhythmbox snapd')
     # remover gnome-keyring se ele começar a dar problemas.
 
     # limpando o sistema caso seja necessário
@@ -118,18 +118,18 @@ def post_install(argumentos):
     chdir('/home/' + argumentos.usuario)
 
     # instalando os dotfiles do meu repositório.
-    # config_command = (
-    #     f'git --git-dir=/home/{argumentos.usuario}/.cfg/ '
-    #     f'--work-tree=/home/{argumentos.usuario}'
-    # )
-    # sy('rm .bashrc .zshrc')
-    # sy(
-    #     'git clone --bare https://github.com/b166erbot/dotfiles '
-    #     f'/home/{argumentos.usuario}/.cfg'
-    # )
-    # sy(config_command + ' checkout')
+    config_command = (
+        f'git --git-dir=/home/{argumentos.usuario}/.cfg/ '
+        f'--work-tree=/home/{argumentos.usuario}'
+    )
+    sy('rm .zshrc') # por que remover .bashrc?
+    sy(
+        'git clone --bare https://github.com/b166erbot/dotfiles '
+        f'/home/{argumentos.usuario}/.cfg'
+    )
+    sy(config_command + ' checkout')
     # não mudar a linha abaixo. sim, tem dois config
-    # sy(config_command + ' config --local status.showUntrackedFiles no')
+    sy(config_command + ' config --local status.showUntrackedFiles no')
 
     # linkando o .bash_aliases para o root
     # sy('ln -s .bash_aliases /root')
@@ -141,10 +141,28 @@ def post_install(argumentos):
     # su -c "comando" -s /bin/sh nomedoUsuario
     # from subprocess import run
     # run(f'su {argumentos.usuario} -c ./restaurar_backup.py'.split())
+    # ******************* perguntar se o usuário quer fazer o backup ou colocar
+    # uma opção --flag para ele fazer ou não o backup.
     restaurar_backup(argumentos)
 
     # meus scripts
     sy("python3 ~/python\ scripts/scripts/setup.py install")
+
+    # arrumando o dunst para ele funcionar e exibir as notificações com temas.
+    sy(
+        'sudo mv /usr/share/dbus-1/services/org.knopwob.dunst.service '
+        '/usr/share/dbus-1/services/org.knopwob.dunst.service.backup'
+    )
+
+    # fazendo o backup do resolv.conf
+    Path('/etc/resolv.conf').rename(Path('/etc/resolv.conf.backup'))
+
+    # colocando o dns para o da cloudfire
+    with Path('/etc/resolv.conf').open('w') as arquivo:
+        arquivo.write('nameserver 1.1.1.1')
+    
+    # travando o arquivo para ninguém poder alterar ele
+    sy('sudo chattr +i /etc/resolv.conf')
 
 
     # finalizando.
@@ -164,7 +182,7 @@ def post_install(argumentos):
         'instalar os drivers da impressora. pesquisa no ddg o nome da impress'
         'ora'
     )
-    print('remover o firefox. snap remove firefox')
+    print('remover o snapd.')
     print('verifique se a instalação do oh-my-zsh foi feita com sucesso')
     print('reinicie o sistema para conferir, se for necessário.')
     print(
@@ -176,6 +194,12 @@ def post_install(argumentos):
         'portanto vai precisar de senha'
     )
     print('instalar os programas da função descompactar do aliases')
+    print(
+        'criar os ambientes virtuais para os programas que uso, '
+        'como o notificar.'
+    )
+    print('configurar o earlyoom no /etc/default/earlyoom (earlyoom --help)')
+    print('configurar o clamav')
     # print('instalar o free-ofice e colocar a chave de ativação permanente nele')
 
 
@@ -218,3 +242,5 @@ def main():
 
 
 # observação: todo "sy" que for adicionado precisa alterar um punhado de testes.
+
+# TODO: após a instalação do oh-my-zsh o programa fecha e sai, faça ele não fechar.

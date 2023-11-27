@@ -41,10 +41,10 @@ class TestPostInstallComandosAvulsos(TestCase):
 			]
 		)
 
-	@skip(
-		'pulado por enquanto até eu criar um repositório separado para '
-		'os meus dotfiles'
-	)
+	# @skip(
+	# 	'pulado por enquanto até eu criar um repositório separado para '
+	# 	'os meus dotfiles'
+	# )
 	def test_sy_sendo_chamado_com_comando_para_instalar_os_dots_do_repositorio(self, sy, *_):
 		post_install(self.argumentos)
 		sy.assert_has_calls(

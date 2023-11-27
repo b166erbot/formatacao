@@ -88,11 +88,11 @@ def fazer_backup(argumentos):
         print('"/home/user/teste teste"')
         print('(para terminar, precione enter com o texto vazio)')
         entradas = pegar_caminhos()
-        with open('configuracoes.json', 'w') as configfile:
+        with open('pastas.json', 'w') as configfile:
             json.dump(entradas, configfile, indent=4)
     elif argumentos.config_arquivo == 'carregar':
-        if Path('configuracoes.json').exists():
-            with open('configuracoes.json') as configfile:
+        if Path('pastas.json').exists():
+            with open('pastas.json') as configfile:
                 entradas = json.load(configfile)
         else:
             print(
