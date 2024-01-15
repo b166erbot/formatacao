@@ -19,14 +19,14 @@
         "comando_install": "pacman -S ",
         "comando_atualizar": "pacman -Syy",
         "programas": [
-            "glade", "gimp", "pycodestyle", "git", "poppler-utils",
+            "glade", "gimp", "python-pycodestyle", "git",
             "bpython", "papirus-icon-theme", "adapta-gtk-theme",
-            "zeal", "usb-creator-gtk", "arc-theme", "gparted",
-            "snapd", "gnome-software-plugin-snap", "transmission-gtk",
+            "usb-creator-gtk", "gparted",
+            "transmission-gtk", "system-config-printer",
             "bash-completion", "gnome-boxes", "python-pip", "libreoffice",
             "zsh", "curl", "nano", "vlc", "file-roller", "flameshot",
-            "diodon", "unrar", "curlftpfs", "yt-dlp", "exo", "ncal",
-            "earlyoom", "clamav", "shellcheck"
+            "unrar", "curlftpfs", "yt-dlp", "exo",
+            "earlyoom", "clamav", "shellcheck", "inxi"
         ],
         "pasta-bin": "/bin",
         "comando_autoremove": "pacman -Qtqd | sudo pacman -Rnsc -"
