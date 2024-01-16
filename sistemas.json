@@ -10,7 +10,8 @@
             "bash-completion", "gnome-boxes", "python3-pip", "libreoffice",
             "zsh", "curl", "nano", "vlc", "file-roller", "flameshot",
             "diodon", "unrar", "curlftpfs", "yt-dlp", "exo-utils",
-            "adapta-gtk-theme", "ncal", "earlyoom", "clamav", "shellcheck"
+            "adapta-gtk-theme", "ncal", "earlyoom", "clamav", "shellcheck",
+            "rofi"
         ],
         "pasta-bin": "/usr/bin",
         "comando_autoremove": "apt autoremove -y"
@@ -21,7 +22,7 @@
         "programas": [
             "glade", "gimp", "python-pycodestyle", "git",
             "bpython", "papirus-icon-theme", "adapta-gtk-theme",
-            "usb-creator-gtk", "gparted",
+            "usb-creator-gtk", "gparted", "rofi",
             "transmission-gtk", "system-config-printer",
             "bash-completion", "gnome-boxes", "python-pip", "libreoffice",
             "zsh", "curl", "nano", "vlc", "file-roller", "flameshot",
