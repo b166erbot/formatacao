@@ -11,7 +11,7 @@
             "zsh", "curl", "nano", "vlc", "file-roller", "flameshot",
             "diodon", "unrar", "curlftpfs", "yt-dlp", "exo-utils",
             "adapta-gtk-theme", "ncal", "earlyoom", "clamav", "shellcheck",
-            "rofi"
+            "rofi", "inxi", "zsh-syntax-highlighting"
         ],
         "pasta-bin": "/usr/bin",
         "comando_autoremove": "apt autoremove -y"
