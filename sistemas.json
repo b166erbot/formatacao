@@ -11,7 +11,7 @@
             "zsh", "curl", "nano", "vlc", "file-roller", "flameshot",
             "diodon", "unrar", "curlftpfs", "yt-dlp", "exo-utils",
             "adapta-gtk-theme", "ncal", "earlyoom", "clamav", "shellcheck",
-            "rofi", "inxi", "zsh-syntax-highlighting"
+            "rofi", "inxi", "zsh-syntax-highlighting", "xdotool"
         ],
         "pasta-bin": "/usr/bin",
         "comando_autoremove": "apt autoremove -y"
@@ -27,7 +27,7 @@
             "bash-completion", "gnome-boxes", "python-pip", "libreoffice",
             "zsh", "curl", "nano", "vlc", "file-roller", "flameshot",
             "unrar", "curlftpfs", "yt-dlp", "exo",
-            "earlyoom", "clamav", "shellcheck", "inxi"
+            "earlyoom", "clamav", "shellcheck", "inxi", "xdotool"
         ],
         "pasta-bin": "/bin",
         "comando_autoremove": "pacman -Qtqd | sudo pacman -Rnsc -"
